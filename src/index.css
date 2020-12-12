@@ -1,8 +1,42 @@
+@font-face {
+	font-family: 'Anybody';
+	src: local('Anybody'), url('./fonts/Anybody-SemiBold.woff2') format('woff2'),
+		local('Anybody'), url('./fonts/Anybody-SemiBold.woff') format('woff');
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Anybody';
+	src: local('Anybody'), url('./fonts/Anybody-Regular.woff2') format('woff2'),
+		local('Anybody'), url('./fonts/Anybody-Regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Anybody';
+	src: local('Anybody'), url('./fonts/Anybody-Medium.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Anybody';
+	src: local('Anybody'), url('./fonts/Anybody-Bold.woff2') format('woff2'),
+		local('Anybody'), url('./fonts/Anybody-Bold.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  color: white;
+  font-family: Anybody, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -1,9 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
 .App {
   text-align: center;
+  font-family: Anybody, sans-serif;
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 10vmin;
+  pointer-events: none;
+}
+
+.App-logo-sm {
+  height: 4vmin;
   pointer-events: none;
 }
 
@@ -35,4 +49,11 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.text-gradient {
+	background: linear-gradient(135deg, #ff3737 0%, #ffd5d8 99.99%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	@apply text-white;
 }
