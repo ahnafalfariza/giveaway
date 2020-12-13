@@ -54,7 +54,7 @@ function App() {
         backgroundImage: `linear-gradient(to bottom, #000000 0%, rgba(0, 0, 0, 0.69) 69%, rgba(0, 0, 0, 0) 100%)`,
       }}
     >
-      <div className="m-auto max-w-4xl">
+      <div className="m-auto max-w-2xl">
         <div className="py-4">
           <svg
             className="mx-auto"
@@ -88,63 +88,68 @@ function App() {
             />
           </svg>
         </div>
-        <h1 className="text-5xl font-bold mt-12 mb-8">Genesis NFT Giveaway</h1>
-        <div className="flex max-w-2xl m-auto space-x-4">
-          <div className="flex-1 border-2 border-gray-800 border-dashed rounded-md p-4">
-            <h2 className="text-gradient text-xl">Start Date</h2>
-            {giveaway && (
-              <>
+        {giveaway && participants && winners && (
+          <>
+            <div className="relative m-auto">
+              <div className="flex justify-center mt-12">
+                <h1 className="text-5xl font-bold mb-8">{giveaway.name} Giveaway</h1>
+                <a
+                  href="https://github.com/ParasHQ/giveaway-contract"
+                  target="_blank"
+                  className="table pb-2 text-gray-200 hover:text-white font-semibold border-b-2 cursor-pointer m-0"
+                >
+                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="ml-1"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.70421 9.70711L13.9971 3.41421V7H15.9971V0H8.9971V2H12.5829L6.28999 8.29289L7.70421 9.70711ZM15 14V10H13V14H2V3H6V1H2C0.89543 1 0 1.89543 0 3V14C0 15.1046 0.89543 16 2 16H13C14.1046 16 15 15.1046 15 14Z" fill="white"></path></svg>
+                </a>
+              </div>
+            </div>
+            <div className="flex m-auto space-x-4">
+              <div className="flex-1 border-2 border-gray-800 border-dashed rounded-md p-4">
+                <h2 className="text-lg">Start Date</h2>
                 <h2 className="text-xl font-bold">{new Date(parseInt(giveaway.startDate)).toDateString()}</h2>
                 <h2 className="text-xl font-bold">{new Date(parseInt(giveaway.startDate)).toLocaleTimeString()}</h2>
-              </>
-            )}
-          </div>
-          <div className="flex-1 border-2 border-gray-800 border-dashed rounded-md p-4">
-            <h2 className="text-gradient text-xl">End Date</h2>
-            {giveaway && (
-              <>
+              </div>
+              <div className="flex-1 border-2 border-gray-800 border-dashed rounded-md p-4">
+                <h2 className="text-lg">End Date</h2>
                 <h2 className="text-xl font-bold">{new Date(parseInt(giveaway.endDate)).toDateString()}</h2>
                 <h2 className="text-xl font-bold">{new Date(parseInt(giveaway.endDate)).toLocaleTimeString()}</h2>
+              </div>
+            </div>
+            {giveaway.date !== 0 && (
+              <>
+                <div className="mt-4 m-auto border-2 border-gray-800 border-dashed rounded-md px-4 py-6">
+                  <h2 className="text-lg">Draw Date</h2>
+                  <h2 className="text-2xl font-bold">{new Date(parseInt(giveaway.drawDate) / 10 ** 6).toDateString()}</h2>
+                  <h2 className="text-2xl  font-bold">{new Date(parseInt(giveaway.drawDate) / 10 ** 6).toLocaleTimeString()}</h2>
+                </div>
+                <div className="m-auto mt-4 border-2 border-gray-800 border-dashed rounded-md p-6">
+                  <h2 className="font-bold text-2xl mb-4">Winners</h2>
+                  <div className="flex flex-wrap">
+                    {winners.map(user => (
+                      <h4 className="w-1/2 font-semibold text-lg">{user}</h4>
+                    ))}
+                  </div>
+                </div>
               </>
             )}
-          </div>
-        </div>
-        <div className="mt-4 max-w-2xl m-auto border-2 border-gray-800 border-dashed rounded-md p-4">
-          <h2 className="text-white text-xl mt-4 font-bold">Draw Date</h2>
-          <h2 className="text-white text-xl mb-4">10 January 2000 18:30 EST + 7</h2>
-        </div>
-        <h2 className="text-white font-bold text-2xl mt-8 mb-4">Winners</h2>
-        <div className="mt-4 border-2 border-gray-800 border-dashed rounded-md p-4">
-          {winners && winners.map(user => (<Winner key={user} username={user} />))}
-        </div>
-        <h2 className="text-white font-bold text-2xl mt-8 mb-4">Participants</h2>
-        <div className="mt-4 border-2 border-gray-800 border-dashed rounded-md p-4">
-          <InfiniteScroll
-            loadMore={getParticipants}
-            hasMore={hasMore}
-          >
-            {participants && participants.map((user, idx) => (<Participant key={idx} username={user} />))}
-          </InfiniteScroll>
-        </div>
+            <div className="m-auto mt-4 border-2 border-gray-800 border-dashed rounded-md p-6">
+              <h2 className="font-bold text-2xl mb-4">Participants</h2>
+              <InfiniteScroll
+                loadMore={getParticipants}
+                hasMore={hasMore}
+              >
+                <div className="flex flex-wrap">
+                  {participants.map((user, idx) => (
+                    <h4 className="w-1/4" key={idx}>{user}</h4>
+                  )
+                  )}
+                </div>
+              </InfiniteScroll>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
-}
-
-const Winner = ({ username }) => {
-  return (
-    <div className="my-1 mx-2 inline-block">
-      <h4>{username}</h4>
-    </div>
-  )
-}
-
-const Participant = ({ username }) => {
-  return (
-    <div className="m-auto">
-      <h4>{username}</h4>
-    </div>
-  )
 }
 
 export default App;
